@@ -1,0 +1,1917 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formation Estran Brest — Portail IA &amp; Pédagogie</title>
+  <style>
+    :root {
+      --sidebar-bg: #1e1538;
+      --sidebar-hover: #2d2052;
+      --sidebar-active: #6d28d9;
+      --bg-grid: #f8f7fc;
+      --grid-line: rgba(109, 40, 217, 0.06);
+      --card-bg: #ffffff;
+      --text-main: #1e1b4b;
+      --text-muted: #4b5563;
+      --border-soft: #e5e7eb;
+
+      --purple-main: #6d28d9;
+      --purple-dark: #4c1d95;
+      --purple-light: #f5f3ff;
+      --purple-border: #ddd6fe;
+
+      --indigo-main: #3730a3;
+      --indigo-dark: #1e1b4b;
+      --indigo-light: #eef2ff;
+      --indigo-border: #c7d2fe;
+
+      --blue-main: #2563eb;
+      --blue-dark: #1e3a8a;
+      --blue-light: #eff6ff;
+      --blue-border: #bfdbfe;
+
+      --amber-bg: #fffbeb;
+      --amber-border: #f59e0b;
+      --amber-text: #92400e;
+
+      --green-bg: #ecfdf5;
+      --green-border: #a7f3d0;
+      --green-text: #065f46;
+
+      --red-bg: #fef2f2;
+      --red-border: #fecaca;
+      --red-text: #b91c1c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-grid);
+      background-image:
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 24px 24px;
+      line-height: 1.55;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    body.projection-mode {
+      font-size: 112%;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 275px;
+      background: linear-gradient(180deg, #1b1236 0%, #25194a 100%);
+      color: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 100;
+      overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-brand {
+      padding: 20px 18px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-eyebrow {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #c4b5fd;
+      font-weight: 700;
+    }
+
+    .sidebar-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 3px;
+    }
+
+    .sidebar-sub {
+      font-size: 0.78rem;
+      color: #d8b4fe;
+      font-style: italic;
+      margin-top: 2px;
+    }
+
+    .nav-group-label {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a78bfa;
+      font-weight: 700;
+      padding: 14px 18px 6px;
+    }
+
+    .nav-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #e5e7eb;
+      text-align: left;
+      padding: 10px 18px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      transition: background 0.15s, color 0.15s;
+      border-left: 3px solid transparent;
+    }
+
+    .nav-btn:hover {
+      background: var(--sidebar-hover);
+      color: #ffffff;
+    }
+
+    .nav-btn.active {
+      background: rgba(124, 58, 237, 0.28);
+      color: #ffffff;
+      font-weight: 700;
+      border-left-color: #a78bfa;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .nav-pill-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .nav-time {
+      font-size: 0.7rem;
+      background: rgba(255,255,255,0.1);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #ddd6fe;
+      flex-shrink: 0;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 14px 18px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .side-action-btn {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+
+    .side-action-btn:hover {
+      background: rgba(255,255,255,0.16);
+    }
+
+    /* MOBILE TOPBAR */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 54px;
+      background: #1b1236;
+      color: #fff;
+      padding: 0 16px;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 110;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .hamburger {
+      background: rgba(255,255,255,0.12);
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      padding: 6px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    /* MAIN CONTENT */
+    .main {
+      margin-left: 275px;
+      flex: 1;
+      padding: 28px 34px 60px;
+      max-width: 1180px;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO BANNERS */
+    .hero-banner {
+      border-radius: 16px;
+      padding: 24px 28px;
+      color: #ffffff;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(30, 27, 75, 0.12);
+    }
+
+    .hero-home { background: linear-gradient(135deg, #311068 0%, #5b21b6 60%, #2563eb 100%); }
+    .hero-indigo { background: linear-gradient(135deg, #1e1b4b 0%, #3730a3 100%); }
+    .hero-violet { background: linear-gradient(135deg, #3b0764 0%, #6d28d9 100%); }
+    .hero-blue { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+
+    .hero-eyebrow {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #e0e7ff;
+      margin-bottom: 4px;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .hero-desc {
+      font-size: 0.96rem;
+      color: #e0e7ff;
+      max-width: 820px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+
+    .pill-glass {
+      background: rgba(255,255,255,0.16);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+
+    .crcn-bar {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .crcn-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #c7d2fe;
+      margin-bottom: 6px;
+    }
+
+    /* CARDS & GRIDS */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 18px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .card-objective {
+      border-left: 5px solid var(--purple-main);
+      background: var(--purple-light);
+    }
+
+    .card-objective.blue {
+      border-left-color: var(--blue-main);
+      background: var(--blue-light);
+    }
+
+    .card-objective.indigo {
+      border-left-color: var(--indigo-main);
+      background: var(--indigo-light);
+    }
+
+    .section-heading {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 22px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .num-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--indigo-main);
+      color: #fff;
+      font-size: 0.88rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .grid-meta {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* ATELIER CARDS ON HOME */
+    .atelier-card {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+      border-top: 5px solid var(--purple-main);
+    }
+
+    .atelier-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(30, 27, 75, 0.08);
+    }
+
+    .atelier-card.indigo { border-top-color: var(--indigo-main); }
+    .atelier-card.violet { border-top-color: var(--purple-dark); }
+    .atelier-card.blue { border-top-color: var(--blue-main); }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn:hover { opacity: 0.92; }
+    .btn:active { transform: scale(0.98); }
+
+    .btn-primary { background: var(--purple-main); color: #fff; }
+    .btn-indigo { background: var(--indigo-main); color: #fff; }
+    .btn-blue { background: var(--blue-main); color: #fff; }
+    .btn-outline {
+      background: #fff;
+      color: var(--text-main);
+      border: 1px solid #cbd5e1;
+    }
+
+    /* PROMPT COPY BOX */
+    .prompt-box {
+      background: #ffffff;
+      border: 1.5px solid var(--purple-border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .prompt-box.blue { border-color: var(--blue-border); }
+    .prompt-box.indigo { border-color: var(--indigo-border); }
+
+    .prompt-header {
+      background: var(--purple-light);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-bottom: 1px solid var(--purple-border);
+    }
+
+    .prompt-box.blue .prompt-header {
+      background: var(--blue-light);
+      border-bottom-color: var(--blue-border);
+    }
+
+    .prompt-box.indigo .prompt-header {
+      background: var(--indigo-light);
+      border-bottom-color: var(--indigo-border);
+    }
+
+    .prompt-title {
+      font-size: 0.83rem;
+      font-weight: 800;
+      color: var(--purple-main);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .prompt-box.blue .prompt-title { color: var(--blue-dark); }
+    .prompt-box.indigo .prompt-title { color: var(--indigo-main); }
+
+    .copy-btn {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      color: var(--text-main);
+      padding: 5px 11px;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+
+    .copy-btn:hover {
+      background: var(--purple-main);
+      color: #fff;
+      border-color: var(--purple-main);
+    }
+
+    .copy-btn.copied {
+      background: #059669 !important;
+      color: #fff !important;
+      border-color: #059669 !important;
+    }
+
+    .prompt-body {
+      padding: 14px 16px;
+      font-size: 0.89rem;
+      color: #1e293b;
+      white-space: pre-line;
+    }
+
+    .prompt-example-note {
+      background: #f8fafc;
+      border-top: 1px dashed #cbd5e1;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* CALLOUTS */
+    .callout {
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      border-left: 5px solid var(--amber-border);
+      background: var(--amber-bg);
+      color: var(--amber-text);
+    }
+
+    .callout.blue {
+      border-left-color: var(--blue-main);
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .callout.indigo {
+      border-left-color: var(--indigo-main);
+      background: var(--indigo-light);
+      color: var(--indigo-dark);
+    }
+
+    .callout-title {
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .callout ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .callout li {
+      font-size: 0.87rem;
+      margin-bottom: 4px;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .callout li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      font-weight: 800;
+    }
+
+    /* CHECKLIST */
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 11px 14px;
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .check-item:hover {
+      border-color: #a78bfa;
+      background: #faf8ff;
+    }
+
+    .check-item.done {
+      background: var(--green-bg);
+      border-color: var(--green-border);
+    }
+
+    .check-box {
+      width: 20px;
+      height: 20px;
+      border-radius: 6px;
+      border: 2px solid #94a3b8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .check-item.done .check-box {
+      background: #059669;
+      border-color: #059669;
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+
+    /* TABLES */
+    .table-wrap {
+      overflow-x: auto;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      border: 1px solid var(--border-soft);
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.87rem;
+    }
+
+    th {
+      background: #2e1065;
+      color: #fff;
+      text-align: left;
+      padding: 11px 14px;
+      font-weight: 700;
+    }
+
+    td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border-soft);
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: #faf9fe;
+    }
+
+    /* DARK CARDS */
+    .dark-card {
+      background: #1e1b4b;
+      color: #e0e7ff;
+      border-radius: 12px;
+      padding: 16px 18px;
+    }
+
+    .dark-card h4 {
+      color: #ffffff;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .dark-card p {
+      font-size: 0.85rem;
+    }
+
+    /* TABS FOR EXAMPLES */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .tab-btn {
+      padding: 8px 14px;
+      border-radius: 9px;
+      border: 1px solid var(--purple-border);
+      background: #fff;
+      color: var(--text-main);
+      font-size: 0.83rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: var(--purple-main);
+      color: #fff;
+      border-color: var(--purple-main);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* RACTIF GENERATOR FORM */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--purple-dark);
+      margin-bottom: 4px;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 9px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      background: #fff;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--purple-main);
+      box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.12);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #1e1b4b;
+      color: #fff;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: all 0.2s ease;
+      z-index: 200;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.open { transform: translateX(0); }
+      .mobile-bar { display: flex; }
+      .main { margin-left: 0; padding: 72px 16px 50px; }
+      .grid-2, .grid-3, .grid-meta, .form-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .sidebar, .mobile-bar, .copy-btn, .side-action-btn, .btn-row { display: none !important; }
+      .main { margin-left: 0; padding: 0; max-width: 100%; }
+      body { background: #fff; }
+      .card, .prompt-box, .hero-banner { break-inside: avoid; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MOBILE TOPBAR -->
+  <div class="mobile-bar">
+    <div>
+      <strong style="font-size:0.95rem;">Formation Estran Brest</strong>
+      <span style="font-size:0.75rem;color:#c4b5fd;display:block;">Portail IA &amp; Pédagogie</span>
+    </div>
+    <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="sidebar-eyebrow">Parcours Enseignants</div>
+      <div class="sidebar-title">Formation Estran Brest</div>
+      <div class="sidebar-sub">Usages avancés de l'IA &amp; BEP</div>
+    </div>
+
+    <div class="nav-group-label">Navigation</div>
+    <button class="nav-btn active" data-view="home" onclick="switchView('home', this)">
+      <span class="nav-left"><span>🏠</span> Accueil &amp; Programme</span>
+    </button>
+    <button class="nav-btn" data-view="ractif" onclick="switchView('ractif', this)">
+      <span class="nav-left"><span>✨</span> Générateur RACTIF</span>
+    </button>
+    <button class="nav-btn" data-view="prompts" onclick="switchView('prompts', this)">
+      <span class="nav-left"><span>📋</span> Boîte à Prompts</span>
+    </button>
+
+    <div class="nav-group-label">Les 4 Ateliers</div>
+    <button class="nav-btn" data-view="atelier-base" onclick="switchView('atelier-base', this)">
+      <span class="nav-left">
+        <span class="nav-pill-num" style="background:#4f46e5;">0</span>
+        Atelier de base
+      </span>
+      <span class="nav-time">60-90'</span>
+    </button>
+    <button class="nav-btn" data-view="atelier-1" onclick="switchView('atelier-1', this)">
+      <span class="nav-left">
+        <span class="nav-pill-num" style="background:#7c3aed;">1</span>
+        Comprendre l'IA
+      </span>
+      <span class="nav-time">1h05</span>
+    </button>
+    <button class="nav-btn" data-view="atelier-2" onclick="switchView('atelier-2', this)">
+      <span class="nav-left">
+        <span class="nav-pill-num" style="background:#2563eb;">2</span>
+        Préparation de cours
+      </span>
+      <span class="nav-time">45-60'</span>
+    </button>
+    <button class="nav-btn" data-view="atelier-meta" onclick="switchView('atelier-meta', this)">
+      <span class="nav-left">
+        <span class="nav-pill-num" style="background:#9333ea;">★</span>
+        Atelier Métaprompt
+      </span>
+      <span class="nav-time">20-30'</span>
+    </button>
+
+    <div class="sidebar-footer">
+      <button class="side-action-btn" onclick="toggleProjection()">🖥️ Mode projection</button>
+      <button class="side-action-btn" onclick="window.print()">🖨️ Imprimer / PDF</button>
+      <button class="side-action-btn" onclick="resetProgress()">↺ Réinitialiser coches</button>
+    </div>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <main class="main">
+
+    <!-- ========================================================= -->
+    <!-- VUE 0 : ACCUEIL & PROGRAMME                               -->
+    <!-- ========================================================= -->
+    <section id="view-home" class="view-section active">
+      <div class="hero-banner hero-home">
+        <div class="hero-eyebrow">Portail interactif des stagiaires • Brest</div>
+        <h1 class="hero-title">Formation Estran Brest — Approfondir ses usages de l'IA</h1>
+        <p class="hero-desc">
+          Un espace unique pour suivre les apports, copier-coller les prompts modèles en un clic,
+          adapter vos supports aux élèves à besoins éducatifs particuliers (BEP) et télécharger les 4 fiches ateliers au format Word (.docx).
+        </p>
+        <div class="pill-row">
+          <span class="pill pill-glass">🤖 Microsoft 365 Copilot</span>
+          <span class="pill pill-glass">💬 ChatGPT</span>
+          <span class="pill pill-glass">🧠 Claude</span>
+          <span class="pill pill-glass">✨ Gemini</span>
+          <span class="pill pill-glass">🇫🇷 Mistral</span>
+        </div>
+        <div class="crcn-bar">
+          <div class="crcn-label">Compétences CRCN-Édu mobilisées sur le parcours</div>
+          <div class="pill-row" style="margin-top:0;">
+            <span class="pill pill-glass">1.2 Collaborer</span>
+            <span class="pill pill-glass">1.5 Posture critique</span>
+            <span class="pill pill-glass">2.1 Sélectionner des ressources</span>
+            <span class="pill pill-glass">2.2 Concevoir des ressources</span>
+            <span class="pill pill-glass">3.1 Concevoir</span>
+            <span class="pill pill-glass">4.1 Inclure, rendre accessible</span>
+            <span class="pill pill-glass">4.2 Différencier</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DÉROULÉ EN 2 TEMPS -->
+      <div class="grid-2">
+        <div class="card" style="border-left:5px solid #6d28d9;">
+          <div style="font-size:0.75rem;font-weight:800;color:#6d28d9;text-transform:uppercase;">Temps 1 — Usages avancés &amp; Posture critique</div>
+          <h3 style="margin:4px 0 8px;font-size:1.05rem;">Comprendre, structurer &amp; automatiser</h3>
+          <ul style="padding-left:18px;font-size:0.88rem;color:var(--text-muted);">
+            <li>Mécanisme des LLM, biais, hallucinations et réflexes de vérification.</li>
+            <li>Conversations dédiées, <strong>mots-graines</strong>, méthode <strong>RACTIF</strong> et analyse multi-angles (10 penseurs, Steelman).</li>
+            <li>Concevoir des <strong>prompts modèles réutilisables</strong> toute l'année grâce au <strong>métaprompt</strong>.</li>
+          </ul>
+        </div>
+        <div class="card" style="border-left:5px solid #2563eb;">
+          <div style="font-size:0.75rem;font-weight:800;color:#2563eb;text-transform:uppercase;">Temps 2 — Adaptation &amp; Différenciation BEP</div>
+          <h3 style="margin:4px 0 8px;font-size:1.05rem;">Rendre chaque support accessible sans baisser l'exigence</h3>
+          <ul style="padding-left:18px;font-size:0.88rem;color:var(--text-muted);">
+            <li>Générer une séquence complète, 5 accroches et des exercices progressifs (★ à ★★★★★).</li>
+            <li>Transformer un document en <strong>3 niveaux</strong> (Débutant / BEP, Intermédiaire, Avancé) et étayer les consignes (DYS, ULIS, allophones).</li>
+            <li>Structurer une notion sous forme d'aide-mémoire visuel et préparer le transfert en classe.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-heading">📚 Les 4 fiches ateliers &amp; supports téléchargeables (.docx)</h2>
+      <div class="grid-2">
+        <!-- Card Atelier de base -->
+        <div class="atelier-card indigo">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="pill" style="background:var(--indigo-light);color:var(--indigo-main);">Atelier de base • 60–90 min</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);font-weight:700;">CRCN 1.5 · 2.1 · 3.1</span>
+            </div>
+            <h3 style="margin:10px 0 6px;font-size:1.08rem;">Interagir avec l'IA : mieux comprendre, mieux questionner</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Fonctionnement prédictif, les 4 pièges à éviter, analyse d'un document sous 10 angles, méthode Steelman, choix du mot juste et subsomption.
+            </p>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-indigo" onclick="switchViewById('atelier-base')">Ouvrir l'atelier →</button>
+            <a class="btn btn-outline" href="Formation_Estran_Brest_Atelier_de_base.docx" download>⬇️ Fiche .docx</a>
+          </div>
+        </div>
+
+        <!-- Card Atelier 1 -->
+        <div class="atelier-card violet">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="pill" style="background:var(--purple-light);color:var(--purple-dark);">Atelier 1 • 1h05 (4 apports)</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);font-weight:700;">Culture commune &amp; IA</span>
+            </div>
+            <h3 style="margin:10px 0 6px;font-size:1.08rem;">Comprendre l'IA générative</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Concepts LLM / Prompt / Hallucination / Token, 5 niveaux de prompt, comparatif des 5 IA (Copilot, ChatGPT, Claude, Gemini, Mistral), polarisation et mots-graines.
+            </p>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="switchViewById('atelier-1')">Ouvrir l'atelier →</button>
+            <a class="btn btn-outline" href="Formation_Estran_Brest_Atelier_1.docx" download>⬇️ Fiche .docx</a>
+          </div>
+        </div>
+
+        <!-- Card Atelier 2 -->
+        <div class="atelier-card blue">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="pill" style="background:var(--blue-light);color:var(--blue-dark);">Atelier 2 • 45–60 min</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);font-weight:700;">CRCN 2.2 · 3.1 · 4.1 · 4.2</span>
+            </div>
+            <h3 style="margin:10px 0 6px;font-size:1.08rem;">Gagner du temps sur la préparation de cours</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Séquence complète, 5 accroches, exercices progressifs, scénario concret Maupassant en 45 min, différenciation 3 niveaux (BEP/DYS) et aide-mémoire visuel.
+            </p>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-blue" onclick="switchViewById('atelier-2')">Ouvrir l'atelier →</button>
+            <a class="btn btn-outline" href="Formation_Estran_Brest_Atelier_2.docx" download>⬇️ Fiche .docx</a>
+          </div>
+        </div>
+
+        <!-- Card Atelier Métaprompt -->
+        <div class="atelier-card">
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="pill" style="background:var(--purple-light);color:var(--purple-main);">Atelier Métaprompt • 20–30 min</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);font-weight:700;">CRCN 1.2 · 1.5 · 2.2 · 3.1</span>
+            </div>
+            <h3 style="margin:10px 0 6px;font-size:1.08rem;">Mieux prompter : le Métaprompt</h3>
+            <p style="font-size:0.86rem;color:var(--text-muted);">
+              Faire poser des questions à l'IA avant qu'elle ne réponde, concevoir des prompts modèles à variables et découvrir 3 exemples Avant / Après en classe.
+            </p>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="switchViewById('atelier-meta')">Ouvrir l'atelier →</button>
+            <a class="btn btn-outline" href="Formation_Estran_Brest_Atelier_Metaprompt.docx" download>⬇️ Fiche .docx</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout indigo">
+        <div class="callout-title">💡 Conseil de déploiement (GitHub Pages / OneDrive / Clé USB)</div>
+        <ul>
+          <li>Placez ce fichier <strong>index.html</strong> dans le même dossier que les 4 fichiers <strong>.docx</strong> : les boutons « Fiche .docx » les téléchargeront directement en un clic.</li>
+          <li>Projetez l'URL de ce portail (ou un QR code) dès l'accueil pour que chaque stagiaire puisse copier-coller les prompts sur son ordinateur ou iPad.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 1 : ATELIER DE BASE                                   -->
+    <!-- ========================================================= -->
+    <section id="view-atelier-base" class="view-section">
+      <div class="hero-banner hero-indigo">
+        <div class="hero-eyebrow">Formation Estran Brest • Atelier de base</div>
+        <h1 class="hero-title">Interagir avec l'IA : mieux comprendre, mieux questionner</h1>
+        <div class="pill-row">
+          <span class="pill pill-glass">⏱ 60–90 min</span>
+          <span class="pill pill-glass">Microsoft 365 Copilot</span>
+          <span class="pill pill-glass">ChatGPT</span>
+          <span class="pill pill-glass">Claude</span>
+          <a class="pill pill-glass" style="text-decoration:none;" href="Formation_Estran_Brest_Atelier_de_base.docx" download>⬇️ Télécharger la fiche .docx</a>
+        </div>
+        <div class="crcn-bar">
+          <div class="crcn-label">Compétences CRCN-Édu</div>
+          <div class="pill-row" style="margin-top:0;">
+            <span class="pill pill-glass">1.5 Posture critique</span>
+            <span class="pill pill-glass">2.1 Sélectionner des ressources</span>
+            <span class="pill pill-glass">3.1 Concevoir</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-objective indigo">
+        <strong>🎯 Objectif :</strong> Comprendre comment l'IA fonctionne vraiment, savoir ce qu'elle ne sait pas faire, et découvrir des techniques concrètes pour obtenir des réponses plus riches et plus utiles — sans se faire piéger par ses erreurs.
+      </div>
+
+      <h2 class="section-heading"><span class="num-badge">1</span> Comment l'IA « fonctionne » — ce qu'il faut savoir avant tout</h2>
+      <div class="card">
+        <p style="font-size:0.92rem;margin-bottom:14px;">
+          Un modèle de langage ne « cherche » pas la bonne réponse : <strong>il prédit le texte le plus probable à partir de votre question. Conséquence directe : changer un mot dans votre prompt peut complètement changer la réponse obtenue.</strong> Les assistants d'aujourd'hui ajoutent par-dessus ce moteur une <strong>recherche web avec sources citées</strong> et un <strong>mode raisonnement</strong> — mais une source citée doit toujours être ouverte et vérifiée.
+        </p>
+        <div class="grid-2" style="margin-bottom:0;">
+          <div class="dark-card">
+            <h4>💬 Chaque mot oriente la réponse</h4>
+            <p>Demandez à l'IA d'« analyser » un texte ou de le « décortiquer » — vous n'obtiendrez pas la même chose. Le choix du verbe, du contexte et du niveau de détail attendu oriente tout.</p>
+          </div>
+          <div class="dark-card">
+            <h4>🧭 C'est vous qui guidez, pas l'IA</h4>
+            <p>L'IA dispose d'une immense quantité de connaissances, mais elle ne sait pas ce que vous cherchez. C'est à vous de formuler la bonne question pour faire émerger la bonne réponse.</p>
+          </div>
+          <div class="dark-card">
+            <h4>🎯 L'IA ne « sait » pas ce qu'elle sait</h4>
+            <p>Le modèle ne sait pas par avance ce qu'il est capable de produire sur un sujet. Posez plusieurs angles de question sur le même sujet : vous serez surpris de la richesse des réponses.</p>
+          </div>
+          <div class="dark-card">
+            <h4>🎛️ Deux boutons à connaître</h4>
+            <p><strong>Mode raisonnement</strong> (« réflexion approfondie ») : à activer dès que la tâche a plusieurs étapes (progression, grille, différenciation). <strong>Recherche web</strong> : à activer dès que la réponse doit être sourcée.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span class="num-badge" style="background:#b91c1c;">2</span> Ce que l'IA ne fait pas — et les pièges à éviter</h2>
+      <div class="dark-card" style="margin-bottom:14px;border-left:5px solid #f59e0b;">
+        <p><strong style="color:#fbbf24;">⚠️ Pour l'IA, il n'existe pas de différence</strong> entre une erreur, une spéculation et un fait avéré. Elle peut produire une réponse brillante ou complètement fausse avec la même fluidité et la même assurance.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card" style="background:var(--red-bg);border-color:var(--red-border);">
+          <h4 style="color:var(--red-text);margin-bottom:6px;">1. Ce que vous lui donnez</h4>
+          <p style="font-size:0.86rem;">Document mal formaté, incomplet ou hors sujet = réponse biaisée. <em>Mauvaise entrée = mauvaise sortie.</em></p>
+        </div>
+        <div class="card" style="background:#fff7ed;border-color:#fed7aa;">
+          <h4 style="color:#c2410c;margin-bottom:6px;">2. Ce que vous lui demandez</h4>
+          <p style="font-size:0.86rem;">Une question vague donne une réponse vague. Si votre prompt contient une hypothèse fausse, l'IA construira dessus.</p>
+        </div>
+        <div class="card" style="background:var(--amber-bg);border-color:#fde68a;">
+          <h4 style="color:var(--amber-text);margin-bottom:6px;">3. Les erreurs qui s'enchaînent</h4>
+          <p style="font-size:0.86rem;">En enchaînant plusieurs étapes sans vérifier, une petite erreur au départ devient une grosse erreur à la fin.</p>
+        </div>
+        <div class="card" style="background:var(--blue-light);border-color:var(--blue-border);">
+          <h4 style="color:var(--blue-dark);margin-bottom:6px;">4. Votre propre vigilance</h4>
+          <p style="font-size:0.86rem;"><em>L'IA ne détruit pas votre cerveau. C'est la paresse de vérifier qui le fait.</em></p>
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span class="num-badge">3</span> Analyser un document sous plusieurs angles (10 penseurs)</h2>
+      <div class="prompt-box indigo">
+        <div class="prompt-header">
+          <span class="prompt-title">Prompt A — Analyser un document sous 10 angles</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Sélectionne 10 penseurs fondamentaux dont tu maîtrises les cadres théoriques en profondeur.
+Leur pensée doit permettre d'analyser ce document à travers des grilles conceptuelles solides.
+Veille à couvrir un maximum de domaines : sciences de l'éducation, psychologie cognitive, didactique, sociologie de l'éducation, philosophie.
+Intègre au moins cinq penseurs spécialisés en sciences de l'éducation, en psychologie cognitive ou en didactique (par exemple Piaget, Vygotski, Bloom, Dewey, Meirieu, Dehaene).
+Privilégie des auteurs dont les travaux sont largement documentés et reconnus, plutôt que des experts contemporains récents.
+Livrable attendu : un tableau à trois colonnes — Penseur | Concept mobilisé | Ce que sa grille révèle sur mon document (2 à 3 phrases). Ne développe pas encore l'analyse complète.
+
+[Collez ici votre document]</div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Penseur</th>
+              <th>Concept mobilisé</th>
+              <th>Ce que sa grille révèle sur une séquence de 4e (exemple concret)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Lev Vygotski</strong></td>
+              <td>Zone proximale de développement (ZPD)</td>
+              <td>Les séances 1 et 2 restent guidées, mais la séance 4 bascule brusquement vers une tâche autonome complexe : un étayage intermédiaire sécuriserait les élèves à BEP.</td>
+            </tr>
+            <tr>
+              <td><strong>Stanislas Dehaene</strong></td>
+              <td>4 piliers de l'apprentissage</td>
+              <td>L'engagement actif est fort en groupe, mais la consolidation espacée manque : un quiz flash 7 jours plus tard ancrerait durablement les notions.</td>
+            </tr>
+            <tr>
+              <td><strong>Philippe Meirieu</strong></td>
+              <td>Différenciation &amp; sens des savoirs</td>
+              <td>Expliciter les critères de réussite dès le début évite de pénaliser les élèves les moins familiers des attendus scolaires implicites.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-heading"><span class="num-badge">4</span> Renforcer un argument avant de le critiquer — le « Steelman »</h2>
+      <div class="prompt-box indigo">
+        <div class="prompt-header">
+          <span class="prompt-title">Prompt B — Steelman (renforcer un argument)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Steelman cet argument : [ARGUMENT]
+Reformule-le dans sa version la plus solide et la plus défendable.
+Montre ce qu'il y a de juste ou de raisonnable dans cette position — même si tu ne l'approuves pas spontanément.</div>
+        <div class="prompt-example-note">
+          <strong>Exemples :</strong> « Les devoirs maison ça sert à rien » ou « Adapter un texte pour les élèves DYS, c'est baisser le niveau » → l'IA révèle l'objection légitime sous-jacente pour mieux y répondre.
+        </div>
+      </div>
+
+      <h2 class="section-heading"><span class="num-badge">5</span> Trouver le bon mot &amp; Analyser par subsomption (+)</h2>
+      <div class="grid-2">
+        <div class="prompt-box indigo" style="margin-bottom:0;">
+          <div class="prompt-header">
+            <span class="prompt-title">Prompt C — Trouver le bon mot</span>
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+          </div>
+          <div class="prompt-body">Propose des alternatives au mot suivant pour l'utiliser dans un prompt : [MOT]
+Pour chaque alternative :
+– donne le terme en français (courant, soutenu ou technique) ;
+– explique en une phrase ce qu'il apporte de différent ;
+– propose un exemple d'utilisation dans une instruction à une IA.
+Inclus aussi, si pertinent, des termes issus d'autres langues sans équivalent exact en français.</div>
+        </div>
+        <div class="prompt-box indigo" style="margin-bottom:0;">
+          <div class="prompt-header">
+            <span class="prompt-title">Prompt D — Subsomption (avancé)</span>
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+          </div>
+          <div class="prompt-body">Analyse ce document à travers le cadre théorique de [Peter Drucker / nom du penseur].
+Structure ton analyse en identifiant les concepts clés mobilisés et en produisant une synthèse intégrative.
+Subsume les éléments du document sous les grandes catégories de sa pensée, en montrant comment chaque idée s'articule à son système théorique.
+
+[Collez ici votre document]</div>
+        </div>
+      </div>
+
+      <div class="dark-card" style="margin:18px 0;border-left:5px solid #f59e0b;">
+        <h4>🎯 À retenir : Bien utiliser l'IA, c'est rester actif — pas déléguer.</h4>
+        <p style="margin-top:6px;"><strong style="color:#fbbf24;">Une IA bien utilisée augmente la pensée.</strong> Une IA mal utilisée industrialise l'erreur.</p>
+      </div>
+
+      <div class="card">
+        <div class="progress-header">
+          <span>✅ Progression en atelier — 5 étapes à cocher</span>
+          <span id="prog-base">0 / 5 étapes</span>
+        </div>
+        <ul class="checklist" data-group="base">
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>1. Tester la sensibilité aux mots :</strong> posez la même question avec deux formulations différentes, puis activez le mode raisonnement et la recherche web.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>2. Tester le Prompt A (10 angles) :</strong> collez un de vos supports de cours et notez le penseur qui vous éclaire le plus.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>3. Appliquer le Prompt B (Steelman) :</strong> testez-le sur une objection fréquente d'élève, de parent ou de collègue.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>4. Tester le Prompt C (Le bon mot) :</strong> explorez les nuances d'un verbe de consigne (« évaluer », « analyser », « résumer »).</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>5. Partager entre pairs :</strong> choisissez avec votre voisin votre règle de vigilance n°1 en classe.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 2 : ATELIER 1 — COMPRENDRE L'IA GÉNÉRATIVE            -->
+    <!-- ========================================================= -->
+    <section id="view-atelier-1" class="view-section">
+      <div class="hero-banner hero-violet">
+        <div class="hero-eyebrow">Formation Estran Brest • Atelier 1</div>
+        <h1 class="hero-title">Comprendre l'IA générative</h1>
+        <p class="hero-desc">Quatre temps d'apports et d'exemples concrets pour construire une culture commune de l'IA, maîtriser les 5 niveaux de prompting et adopter les bons réflexes pédagogiques.</p>
+        <div class="pill-row">
+          <span class="pill pill-glass">⏱ 1h05 (4 apports)</span>
+          <span class="pill pill-glass">Microsoft 365 Copilot</span>
+          <span class="pill pill-glass">ChatGPT</span>
+          <span class="pill pill-glass">Claude</span>
+          <span class="pill pill-glass">Gemini</span>
+          <span class="pill pill-glass">Mistral</span>
+          <a class="pill pill-glass" style="text-decoration:none;" href="Formation_Estran_Brest_Atelier_1.docx" download>⬇️ Télécharger la fiche .docx</a>
+        </div>
+      </div>
+
+      <h2 class="section-heading">📊 Apport 1 — Qu'est-ce que l'IA générative ? (20 min)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Concept</th>
+              <th>Définition simple</th>
+              <th>Ce que ça change (+ exemple en classe)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pill" style="background:var(--purple-light);color:var(--purple-main);">LLM</span></td>
+              <td>Modèle de langage entraîné sur des milliards de textes. Prédit le mot suivant le plus probable.</td>
+              <td><strong>Machine statistique, pas « intelligence » :</strong> « La capitale de la Bretagne est… » est complété par probabilité, non par expérience.</td>
+            </tr>
+            <tr>
+              <td><span class="pill" style="background:var(--purple-light);color:var(--purple-main);">Prompt</span></td>
+              <td>La requête envoyée à l'IA. Sa formulation détermine 80 % de la qualité de la réponse.</td>
+              <td><strong>Le contexte change tout :</strong> préciser le niveau (6e), la difficulté et une analogie concrète transforme un cours générique.</td>
+            </tr>
+            <tr>
+              <td><span class="pill" style="background:var(--purple-light);color:var(--purple-main);">Hallucination</span></td>
+              <td>Invention plausible de faits, dates ou citations. Toujours vérifier les données sensibles.</td>
+              <td><strong>Sources obligatoires :</strong> privilégier Copilot avec recherche web ou Perplexity et ouvrir les liens cités.</td>
+            </tr>
+            <tr>
+              <td><span class="pill" style="background:var(--purple-light);color:var(--purple-main);">Token</span></td>
+              <td>Unité de traitement (~0,75 mot en français) avec une fenêtre de mémoire limitée.</td>
+              <td><strong>Conversations dédiées :</strong> ouvrir une nouvelle conversation par chapitre ou par projet évite la perte de consignes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">Prompt clé — Générer un cours structuré</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Tu es expert en ingénierie pédagogique. Crée un cours sur [sujet] pour des élèves de [niveau] en [matière]. Inclus : accroche, objectifs, déroulé, activité, trace écrite. Format : tableau.</div>
+      </div>
+
+      <h2 class="section-heading">🎯 Apport 2 — Prompter efficacement : les 5 niveaux (15 min)</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Niveau</th>
+              <th>Exemple en classe</th>
+              <th>Ce que ça change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1 — Minimal</strong></td>
+              <td>« Explique la photosynthèse »</td>
+              <td>Résultat générique, souvent trop scolaire ou mal calibré.</td>
+            </tr>
+            <tr>
+              <td><strong>2 — Contextualisé</strong></td>
+              <td>« Explique la photosynthèse pour des élèves de 4e en difficulté »</td>
+              <td>Bien meilleur — le niveau et le profil des élèves changent tout.</td>
+            </tr>
+            <tr>
+              <td><strong>3 — Structuré (RACTIF)</strong></td>
+              <td>Rôle + Action + Contexte + Ton + Instructions + Format</td>
+              <td>La méthode de référence pour les supports complets et reproductibles.</td>
+            </tr>
+            <tr>
+              <td><strong>4 — Itératif</strong></td>
+              <td>« Maintenant simplifie les consignes pour un élève dyslexique… »</td>
+              <td>Affiner dans la même conversation = progresser vers du sur-mesure.</td>
+            </tr>
+            <tr>
+              <td><strong>5 — Système</strong></td>
+              <td>Instructions permanentes d'un assistant (Copilot Agent, Gem, GPT)</td>
+              <td>Le niveau des assistants personnalisés, compétences (skills) et modèles.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 class="section-heading">🔀 Apport 3 — Simulateur : la même question, 4 réponses différentes (15 min)</h2>
+      <div class="card">
+        <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;">
+          <label for="sim-select" style="font-weight:800;font-size:0.9rem;">Question posée aux 4 IA :</label>
+          <select id="sim-select" onchange="updateSimulator()" style="flex:1;min-width:260px;padding:9px 12px;border-radius:9px;border:1.5px solid var(--purple-border);font-weight:600;">
+            <option value="0">Donne-moi 3 arguments pour intégrer l'IA dans mon enseignement.</option>
+            <option value="1">Comment adapter un texte historique complexe pour un élève dyslexique en 4e ?</option>
+            <option value="2">Quels risques principaux les élèves rencontrent-ils avec l'IA au lycée ?</option>
+          </select>
+        </div>
+        <div class="grid-2" id="sim-grid" style="margin-bottom:12px;"></div>
+        <div class="callout indigo" style="margin-bottom:0;">
+          <div class="callout-title">💡 Ce que le croisement révèle</div>
+          <ul>
+            <li>ChatGPT mise sur l'efficacité, Claude sur la nuance pédagogique et éthique, Gemini sur l'intégration multimodale, Mistral sur la souveraineté RGPD et la langue française. Croiser les regards réduit les biais.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-heading">🌱 Apport 4 — Les « mots-graines » prêts à l'emploi (15 min)</h2>
+      <div class="card card-objective">
+        <strong>Concept fondamental :</strong> Un seul terme bien choisi (<em>synthétiser</em> au lieu de <em>résumer</em>, <em>étayer</em> au lieu d'<em>aider</em>) réveille tout un réseau de méthodes dans l'entraînement de l'IA.
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Remplacer → Par</th>
+              <th>Ce que le mot-graine active</th>
+              <th>Exemple concret en classe / BEP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Résumer → Synthétiser</strong></td><td>Dégage les idées directrices et les liens logiques.</td><td>« Synthétise ce chapitre en 3 axes structurants pour la trace écrite. »</td></tr>
+            <tr><td><strong>Aider → Étayer</strong></td><td>Active les gestes de guidage progressif sans faire à la place.</td><td>« Étaie cette consigne de rédaction pour un élève à BEP. »</td></tr>
+            <tr><td><strong>Expliquer → Décortiquer</strong></td><td>Décompose un mécanisme complexe étape par étape.</td><td>« Décortique la règle de trois en 4 micro-étapes visuelles. »</td></tr>
+            <tr><td><strong>Lister → Hiérarchiser</strong></td><td>Classe par ordre d'importance ou de difficulté croissante.</td><td>« Hiérarchise ces 10 notions : indispensables / utiles / bonus. »</td></tr>
+            <tr><td><strong>Comparer → Confronter</strong></td><td>Met en tension deux points de vue ou documents.</td><td>« Confronte ces deux témoignages dans un tableau (accords / divergences). »</td></tr>
+            <tr><td><strong>Simplifier → Vulgariser</strong></td><td>Rend accessible par analogie juste sans appauvrir le sens.</td><td>« Vulgarise le fonctionnement de l'ADN pour des 3e. »</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">Astuce — Faire trouver les mots-graines par l'IA</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Pour le concept d'analyse (ou de synthèse), trouve-moi les mots les plus denses possible, toutes langues confondues, qui encapsulent à la fois une méthode et une intention. Explique en une ligne ce que chacun active.</div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 3 : ATELIER 2 — PRÉPARATION DE COURS                  -->
+    <!-- ========================================================= -->
+    <section id="view-atelier-2" class="view-section">
+      <div class="hero-banner hero-blue">
+        <div class="hero-eyebrow">Formation Estran Brest • Atelier 2</div>
+        <h1 class="hero-title">Gagner du temps sur la préparation de cours</h1>
+        <div class="pill-row">
+          <span class="pill pill-glass">⏱ 45–60 min</span>
+          <span class="pill pill-glass">Microsoft 365 Copilot</span>
+          <span class="pill pill-glass">ChatGPT</span>
+          <span class="pill pill-glass">Claude</span>
+          <span class="pill pill-glass">Gemini</span>
+          <a class="pill pill-glass" style="text-decoration:none;" href="Formation_Estran_Brest_Atelier_2.docx" download>⬇️ Télécharger la fiche .docx</a>
+        </div>
+        <div class="crcn-bar">
+          <div class="crcn-label">Compétences CRCN-Édu</div>
+          <div class="pill-row" style="margin-top:0;">
+            <span class="pill pill-glass">2.2 Concevoir des ressources</span>
+            <span class="pill pill-glass">3.1 Concevoir</span>
+            <span class="pill pill-glass">4.1 Inclure, rendre accessible</span>
+            <span class="pill pill-glass">4.2 Différencier</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-objective blue">
+        <strong>🎯 Objectif :</strong> Concevoir ou enrichir une séquence de cours complète en utilisant l'IA comme co-concepteur pédagogique — du gain de temps à la créativité augmentée.
+      </div>
+
+      <div class="card">
+        <div class="progress-header">
+          <span>Progression en atelier — 5 étapes à cocher</span>
+          <span id="prog-at2">0 / 5 étapes</span>
+        </div>
+        <ul class="checklist" data-group="at2">
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>1. Choisissez une séquence à travailler :</strong> un thème que vous préparez ou voulez améliorer.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>2. Utilisez le Prompt A</strong> pour générer la structure complète de votre séquence (tableau Séance / Objectif / Activité…).</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>3. Affinez dans la même conversation :</strong> demandez des variantes, de la différenciation, des activités DYS / BEP.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>4. Générez une accroche originale avec le Prompt B</strong> — choisissez votre préférée.</span></li>
+          <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>5. Créez 5 exercices progressifs (★ à ★★★★★)</strong> avec le Prompt C.</span></li>
+        </ul>
+      </div>
+
+      <h2 class="section-heading">📋 Les 4 prompts de conception de cours</h2>
+      <div class="prompt-box blue">
+        <div class="prompt-header">
+          <span class="prompt-title">Prompt A — Séquence complète</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Tu es expert en ingénierie pédagogique. Construis une séquence de [X séances] sur [sujet] pour des élèves de [niveau] en [matière]. Chaque séance inclut : objectif d'apprentissage précis, activité principale, support suggéré, et temps de différenciation. Format : tableau Séance | Durée | Objectif | Activité | Support | Différenciation.</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="prompt-box blue" style="margin-bottom:0;">
+          <div class="prompt-header">
+            <span class="prompt-title">Prompt B — 5 accroches originales</span>
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+          </div>
+          <div class="prompt-body">Propose 5 façons d'introduire le chapitre sur [sujet] à des élèves de [niveau] : une accroche vidéo courte, une question-défi, un cas du quotidien, une image mystère, un extrait d'actualité. Pour chaque accroche, explique comment l'utiliser en 3 minutes.</div>
+        </div>
+        <div class="prompt-box blue" style="margin-bottom:0;">
+          <div class="prompt-header">
+            <span class="prompt-title">Prompt C — Exercices progressifs</span>
+            <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+          </div>
+          <div class="prompt-body">Génère 5 exercices progressifs sur [notion] pour des élèves de [niveau] : du plus simple au plus complexe. Pour chaque exercice : consigne, niveau de difficulté (★ à ★★★★★), et correction-type.</div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">📖 Scénario concret — Lettres, 4e : Énéa prépare Maupassant en 45 min</h2>
+      <div class="card" style="border-top:5px solid var(--blue-main);">
+        <p style="font-size:0.88rem;margin-bottom:12px;">
+          <strong>Contexte :</strong> Énéa prépare une séquence de 6 séances sur <em>La nouvelle réaliste</em> (Maupassant) en 45 minutes chrono :
+          <strong>8 min</strong> (structure via Prompt A) → <strong>5 min</strong> (colonne DYS dans la même conversation) → <strong>5 min</strong> (image mystère via Prompt B) → <strong>10 min</strong> (exercices gradués via Prompt C) → <strong>10 min</strong> (relecture critique et correction d'une erreur de date sur <em>Boule de suif</em>, 1880 et non 1885).
+        </p>
+        <div class="callout blue" style="margin-bottom:0;">
+          <div class="callout-title">🏁 Résultat en 45 minutes chrono (vs 2h30 à 3h sans IA)</div>
+          <ul>
+            <li>Fiche séquence 6 séances complète + colonne DYS + 5 accroches + 4 exercices corrigés, relus et validés par l'enseignante.</li>
+          </ul>
+        </div>
+      </div>
+
+      <h2 class="section-heading">🎯 Différenciation éclair — Adapter un texte en 3 niveaux (BEP / DYS)</h2>
+      <div class="prompt-box blue">
+        <div class="prompt-header">
+          <span class="prompt-title">Différenciation 3 niveaux — Prompt prêt à copier</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Tu es un expert en pédagogie différenciée dans le second degré.
+Matière : [matière] — Classe : [niveau].
+À partir du texte ci-dessous, produis trois reformulations adaptées à différents niveaux :
+- Niveau débutant : phrases courtes, vocabulaire simple et concret, exemples du quotidien pour faciliter la compréhension.
+- Niveau intermédiaire : vocabulaire plus riche, phrases un peu plus longues, introduction de quelques notions disciplinaires de base.
+- Niveau avancé : vocabulaire précis et soutenu, intégration des concepts clés de la discipline, explications plus détaillées et approfondies.
+Présente chaque version sous forme de paragraphe clair et autonome. Indique entre parenthèses le niveau de difficulté au début de chaque paragraphe.
+
+Texte à transformer :
+[COLLEZ VOTRE TEXTE ICI]</div>
+      </div>
+
+      <div class="prompt-box blue">
+        <div class="prompt-header">
+          <span class="prompt-title">Aide-mémoire visuel — Carte mentale de notion</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Agis comme un enseignant expérimenté du second degré.
+Résume en 5 à 7 idées clés la notion suivante : [VOTRE MATIÈRE - VOTRE NIVEAU] : [NOM DE LA NOTION]
+Propose une structure de carte mentale avec 3 à 5 branches principales et 2 sous-idées par branche.
+Suggère une phrase-titre courte et percutante.
+Indique 5 icônes ou symboles simples qui pourraient illustrer les idées principales (mots entre parenthèses).
+Réécris le tout avec un langage accessible pour des élèves de collège ou de lycée, sans jargon et avec des exemples concrets.
+Si possible, génère une image de la carte mentale.</div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 4 : ATELIER MÉTAPROMPT                                -->
+    <!-- ========================================================= -->
+    <section id="view-atelier-meta" class="view-section">
+      <div class="hero-banner hero-violet">
+        <div class="hero-eyebrow">Formation Estran Brest • Atelier Métaprompt</div>
+        <h1 class="hero-title">Mieux prompter : le Métaprompt</h1>
+        <p class="hero-desc">Transformer une idée floue en prompt optimisé, fiable et réutilisable toute l'année en faisant poser les bonnes questions par l'IA avant qu'elle ne réponde.</p>
+        <div class="pill-row">
+          <span class="pill pill-glass">⏱ 20 à 30 min</span>
+          <span class="pill pill-glass">Microsoft 365 Copilot</span>
+          <span class="pill pill-glass">ChatGPT</span>
+          <span class="pill pill-glass">Gemini</span>
+          <span class="pill pill-glass">Claude</span>
+          <span class="pill pill-glass">Mistral</span>
+          <a class="pill pill-glass" style="text-decoration:none;" href="Formation_Estran_Brest_Atelier_Metaprompt.docx" download>⬇️ Télécharger la fiche .docx</a>
+        </div>
+        <div class="crcn-bar">
+          <div class="crcn-label">Compétences CRCN-Édu validées</div>
+          <div class="pill-row" style="margin-top:0;">
+            <span class="pill pill-glass">1.2 Collaborer</span>
+            <span class="pill pill-glass">1.5 Posture critique</span>
+            <span class="pill pill-glass">2.2 Concevoir des ressources</span>
+            <span class="pill pill-glass">3.1 Concevoir</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-objective">
+        <strong>🎯 Objectif :</strong> Transformer n'importe quelle idée en requête IA de qualité professionnelle — et concevoir des prompts modèles réutilisables en quelques secondes sur un nouveau chapitre.
+      </div>
+
+      <div class="grid-meta">
+        <div>
+          <div class="card">
+            <div class="progress-header">
+              <span>● Déroulement pas à pas</span>
+              <span id="prog-meta">0 / 5 étapes</span>
+            </div>
+            <ul class="checklist" data-group="meta">
+              <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>Copier-coller le Prompt A (métaprompt)</strong> dans l'IA de votre choix.</span></li>
+              <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>Formuler une demande simple</strong> (ex. : créer un cours sur la photosynthèse).</span></li>
+              <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>Laisser l'IA poser ses questions de clarification</strong> — y répondre précisément.</span></li>
+              <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>Observer le prompt finalisé</strong> généré par l'IA.</span></li>
+              <li class="check-item" onclick="toggleCheck(this)"><span class="check-box">✓</span><span><strong>Utiliser puis réutiliser ce prompt</strong> en changeant simplement la variable [SUJET].</span></li>
+            </ul>
+          </div>
+
+          <div class="callout">
+            <div class="callout-title">💡 Tips &amp; Astuces</div>
+            <ul>
+              <li>L'IA pose des questions AVANT de répondre : c'est tout le principe du métaprompt !</li>
+              <li>Cette méthode est idéale pour rédiger les instructions d'un assistant ou d'un agent IA (Copilot, Gem, GPT).</li>
+              <li>Gardez le prompt finalisé dans Word ou OneDrive : il est réutilisable et partageable avec vos collègues.</li>
+              <li>Comparez le résultat avec et sans métaprompt pour mesurer l'impact immédiat sur la qualité.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span class="prompt-title">Prompt A — Le Métaprompt complet</span>
+              <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+            </div>
+            <div class="prompt-body">Tu es un expert en ingénierie de prompts pour l'intelligence artificielle, spécialisé dans l'optimisation des requêtes pour obtenir des réponses précises, pertinentes et adaptées aux usages professionnels.
+
+Ta tâche est de transformer n'importe quelle consigne brute (même simple ou incomplète) que je te donne, en un prompt structuré, complet et optimisé.
+
+Voici la structure que tu dois appliquer :
+- Rôle à donner à l'IA
+- Tâche spécifique attendue
+- Objectif de la demande
+- Contexte utile à connaître
+- Tonalité à adopter
+- Contraintes à respecter
+- Étapes (facultatif)
+- Format attendu de la réponse
+
+Pose-moi des questions pour clarifier les zones floues, puis rédige un prompt finalisé.</div>
+          </div>
+
+          <div class="prompt-box">
+            <div class="prompt-header">
+              <span class="prompt-title">Prompt B — Modèle réutilisable à variables</span>
+              <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+            </div>
+            <div class="prompt-body">Tu es un ingénieur pédagogique expert en prompt engineering. Aide-moi à concevoir un prompt modèle réutilisable toute l'année pour produire toujours le même format de support. Utilise des variables entre crochets ([MATIÈRE], [NIVEAU], [THÈME], [DURÉE], [ADAPTATION BEP]) afin que je puisse l'adapter en quelques secondes à un nouveau chapitre. Pose-moi d'abord 4 questions courtes sur ma manière d'enseigner et le format attendu, puis génère le prompt modèle prêt à l'emploi.</div>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="section-heading">🔍 Exemples concrets en classe — Avant / Après métaprompt</h2>
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab(this, 'ex1')">1. Fiche séance SVT 5e</button>
+        <button class="tab-btn" onclick="switchTab(this, 'ex2')">2. Adaptation BEP (Dyslexie)</button>
+        <button class="tab-btn" onclick="switchTab(this, 'ex3')">3. QCM formatif gradué</button>
+      </div>
+
+      <div id="ex1" class="tab-panel active card">
+        <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:8px;"><strong>Idée brute :</strong> <em>« Crée un cours sur la photosynthèse pour des élèves de 5e. »</em></p>
+        <p style="font-size:0.86rem;color:var(--purple-main);margin-bottom:8px;"><strong>Questions clés de l'IA :</strong> Durée exacte ? Prérequis ? Démarche d'investigation, trace écrite courte et activité différenciée souhaitées ?</p>
+        <p style="font-size:0.88rem;"><strong>Prompt finalisé réutilisable :</strong> « Agis en tant qu'enseignant de SVT au collège. Conçois une fiche séance de [DURÉE : 55 min] pour une classe de [NIVEAU : 5e] sur [THÈME : la photosynthèse]. Structure impérative : 1) Situation déclenchante (5 min), 2) Activité d'investigation (25 min), 3) Trace écrite de 5 lignes max en langage clair (10 min), 4) Quiz flash de 3 questions (10 min). Format : tableau Timing | Rôle enseignant | Activité élève | Critère de réussite. »</p>
+      </div>
+
+      <div id="ex2" class="tab-panel card">
+        <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:8px;"><strong>Idée brute :</strong> <em>« Adapte ce texte de cours pour un élève dyslexique. »</em></p>
+        <p style="font-size:0.86rem;color:var(--purple-main);margin-bottom:8px;"><strong>Questions clés de l'IA :</strong> Niveau de classe ? Notions incontournables à préserver ? Obstacles ciblés (décodage, lexique abstrait, consignes doubles) ?</p>
+        <p style="font-size:0.88rem;"><strong>Prompt finalisé réutilisable :</strong> « Tu es enseignant spécialisé en adaptation scolaire (BEP). Réécris le texte ci-dessous pour un élève de [NIVEAU] présentant une dyslexie, sans appauvrir les notions clés du programme. Contraintes : 1) Paragraphes courts (3 lignes max) avec intertitres explicites, 2) Phrases simples de 15 mots max à la voix active, 3) Mets en gras les 5 mots-clés et ajoute un encadré Mini-lexique, 4) Transforme chaque consigne complexe en étapes numérotées (1 verbe d'action par ligne). »</p>
+      </div>
+
+      <div id="ex3" class="tab-panel card">
+        <p style="font-size:0.86rem;color:var(--text-muted);margin-bottom:8px;"><strong>Idée brute :</strong> <em>« Fais-moi un QCM pour réviser le chapitre. »</em></p>
+        <p style="font-size:0.86rem;color:var(--purple-main);margin-bottom:8px;"><strong>Questions clés de l'IA :</strong> Nombre de questions ? Niveaux taxonomiques ? Feedbacks explicatifs pour les distracteurs ?</p>
+        <p style="font-size:0.88rem;"><strong>Prompt finalisé réutilisable :</strong> « Agis comme un formateur expert en évaluation formative. Crée un QCM de [NB : 9] questions pour des élèves de [NIVEAU] sur [THÈME], réparti en 3 niveaux (repérage, compréhension, application). Pour chaque question : 4 propositions dont 3 distracteurs crédibles issus d'erreurs fréquentes d'élèves, et un tableau corrigé incluant un feedback bienveillant de 2 lignes expliquant pourquoi les autres choix sont erronés. »</p>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 5 : GÉNÉRATEUR RACTIF INTERACTIF                      -->
+    <!-- ========================================================= -->
+    <section id="view-ractif" class="view-section">
+      <div class="hero-banner hero-violet">
+        <div class="hero-eyebrow">Outil pratique d'atelier • Formation Estran Brest</div>
+        <h1 class="hero-title">✨ Générateur de prompt RACTIF</h1>
+        <p class="hero-desc">Construisez un prompt structuré en 30 secondes en renseignant les 6 piliers (Rôle, Action, Contexte, Ton, Instructions &amp; BEP, Format), puis copiez-le dans votre IA.</p>
+      </div>
+
+      <div class="card">
+        <div class="btn-row" style="margin-top:0;margin-bottom:16px;">
+          <span style="font-size:0.82rem;font-weight:700;color:var(--text-muted);align-self:center;">Modèles rapides :</span>
+          <button class="btn btn-outline" onclick="fillRactif('seance')">📚 Fiche séance</button>
+          <button class="btn btn-outline" onclick="fillRactif('bep')">🧩 Adaptation BEP / DYS</button>
+          <button class="btn btn-outline" onclick="fillRactif('eval')">✅ Évaluation &amp; grille</button>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="r-role">R — Rôle donné à l'IA</label>
+            <input id="r-role" type="text" placeholder="Ex. : Enseignant expérimenté de SVT au collège" oninput="buildRactif()" />
+          </div>
+          <div class="form-group">
+            <label for="r-action">A — Action précise (mot-graine)</label>
+            <input id="r-action" type="text" placeholder="Ex. : Concevoir et structurer une séance complète" oninput="buildRactif()" />
+          </div>
+          <div class="form-group">
+            <label for="r-contexte">C — Contexte (niveau, classe, chapitre)</label>
+            <input id="r-contexte" type="text" placeholder="Ex. : Classe de 5e hétérogène, chapitre sur la respiration (55 min)" oninput="buildRactif()" />
+          </div>
+          <div class="form-group">
+            <label for="r-ton">T — Tonalité attendue</label>
+            <input id="r-ton" type="text" placeholder="Ex. : Clair, rigoureux, bienveillant et accessible aux élèves" oninput="buildRactif()" />
+          </div>
+          <div class="form-group">
+            <label for="r-inst">I — Instructions &amp; contraintes (BEP, durée, exclusions)</label>
+            <textarea id="r-inst" rows="3" placeholder="Ex. : Inclure une accroche de 5 min, une activité documentaire avec variante étayée pour élèves dyslexiques, et une trace écrite de 5 lignes maximum." oninput="buildRactif()"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="r-format">F — Format de sortie attendu</label>
+            <textarea id="r-format" rows="3" placeholder="Ex. : Tableau à 4 colonnes (Timing | Rôle enseignant | Activité élève | Adaptation BEP) suivi d'un encadré Lexique." oninput="buildRactif()"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">Votre prompt RACTIF prêt à copier-coller</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier le prompt</button>
+        </div>
+        <div class="prompt-body" id="ractif-output">Remplissez les champs ci-dessus (ou cliquez sur un modèle rapide) pour générer votre prompt structuré…</div>
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- VUE 6 : BOÎTE À PROMPTS & ACCÈS OUTILS IA                 -->
+    <!-- ========================================================= -->
+    <section id="view-prompts" class="view-section">
+      <div class="hero-banner hero-indigo">
+        <div class="hero-eyebrow">Ressources rapides • Formation Estran Brest</div>
+        <h1 class="hero-title">📋 Boîte à Prompts &amp; Accès directs aux IA</h1>
+        <p class="hero-desc">Tous les prompts essentiels du parcours rassemblés au même endroit, prêts à être copiés-collés pendant vos préparations de cours.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:1rem;margin-bottom:10px;">🚀 Accès rapides aux plateformes IA</h3>
+        <div class="btn-row" style="margin-top:0;">
+          <a class="btn btn-blue" href="https://m365.cloud.microsoft/chat" target="_blank" rel="noopener">Microsoft 365 Copilot ↗</a>
+          <a class="btn btn-primary" href="https://chat.mistral.ai" target="_blank" rel="noopener">Mistral Le Chat 🇫🇷 ↗</a>
+          <a class="btn btn-indigo" href="https://claude.ai" target="_blank" rel="noopener">Claude ↗</a>
+          <a class="btn btn-outline" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini ↗</a>
+          <a class="btn btn-outline" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT ↗</a>
+          <a class="btn btn-outline" href="https://www.perplexity.ai" target="_blank" rel="noopener">Perplexity ↗</a>
+        </div>
+      </div>
+
+      <div class="prompt-box">
+        <div class="prompt-header">
+          <span class="prompt-title">1. Le Métaprompt universel (Atelier Métaprompt)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Tu es un expert en ingénierie de prompts pour l'intelligence artificielle. Ta tâche est de transformer n'importe quelle consigne brute que je te donne en un prompt structuré (Rôle, Tâche, Objectif, Contexte, Tonalité, Contraintes, Étapes, Format). Pose-moi d'abord des questions pour clarifier les zones floues, puis rédige un prompt finalisé.</div>
+      </div>
+
+      <div class="prompt-box blue">
+        <div class="prompt-header">
+          <span class="prompt-title">2. Adaptation support élèves à BEP / DYS (Atelier 2)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Tu es enseignant spécialisé en adaptation scolaire (BEP). Réécris le support ci-dessous pour des élèves de [NIVEAU] présentant des troubles DYS ou une surcharge cognitive, sans appauvrir les notions clés du programme. Contraintes : paragraphes de 3 lignes maximum avec intertitres explicites, phrases courtes à la voix active, mots-clés en gras avec un mini-lexique, et consignes découpées en étapes numérotées avec un seul verbe d'action par ligne.
+
+Support : [COLLEZ VOTRE TEXTE]</div>
+      </div>
+
+      <div class="prompt-box indigo">
+        <div class="prompt-header">
+          <span class="prompt-title">3. Vérification critique &amp; traçage d'erreur (Atelier de base)</span>
+          <button class="copy-btn" onclick="copyPrompt(this)">📋 Copier</button>
+        </div>
+        <div class="prompt-body">Relis ta réponse précédente avec un regard critique :
+1. Identifie les affirmations, dates ou chiffres qui nécessitent une vérification externe.
+2. Indique quelles zones floues de ma consigne initiale tu as dû combler par défaut.
+3. Propose 2 améliorations pour rendre ce support encore plus fiable et adapté à des élèves de [NIVEAU].</div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="toast" id="toast">✓ Copié dans le presse-papiers !</div>
+
+  <script>
+    // Navigation entre vues
+    function switchView(viewId, btn) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.add('active');
+      if (btn) btn.classList.add('active');
+      document.getElementById('sidebar').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function switchViewById(viewId) {
+      const btn = document.querySelector(`.nav-btn[data-view="${viewId}"]`);
+      switchView(viewId, btn);
+    }
+
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('open');
+    }
+
+    function toggleProjection() {
+      document.body.classList.toggle('projection-mode');
+      showToast(document.body.classList.contains('projection-mode') ? '🖥️ Mode projection activé' : '🖥️ Mode normal');
+    }
+
+    // Copie robuste (HTTPS + file:// local)
+    function copyPrompt(btn) {
+      const box = btn.closest('.prompt-box');
+      const text = box.querySelector('.prompt-body').innerText.trim();
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => markCopied(btn)).catch(() => fallbackCopy(text, btn));
+      } else {
+        fallbackCopy(text, btn);
+      }
+    }
+
+    function fallbackCopy(text, btn) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy');
+        markCopied(btn);
+      } catch (e) {
+        showToast('Sélectionnez le texte manuellement (Ctrl+C)');
+      }
+      document.body.removeChild(ta);
+    }
+
+    function markCopied(btn) {
+      const orig = btn.innerHTML;
+      btn.classList.add('copied');
+      btn.innerHTML = '✓ Copié !';
+      showToast('✓ Prompt copié dans le presse-papiers !');
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = orig;
+      }, 1800);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // Checklists avec persistance localStorage
+    function toggleCheck(li) {
+      li.classList.toggle('done');
+      saveChecks();
+      updateAllProgress();
+    }
+
+    function saveChecks() {
+      const state = [];
+      document.querySelectorAll('.check-item').forEach((item, idx) => {
+        if (item.classList.contains('done')) state.push(idx);
+      });
+      try { localStorage.setItem('estran_brest_checks', JSON.stringify(state)); } catch (e) {}
+    }
+
+    function loadChecks() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('estran_brest_checks') || '[]');
+        const items = document.querySelectorAll('.check-item');
+        saved.forEach(idx => { if (items[idx]) items[idx].classList.add('done'); });
+      } catch (e) {}
+      updateAllProgress();
+    }
+
+    function resetProgress() {
+      document.querySelectorAll('.check-item').forEach(i => i.classList.remove('done'));
+      try { localStorage.removeItem('estran_brest_checks'); } catch (e) {}
+      updateAllProgress();
+      showToast('↺ Progression réinitialisée');
+    }
+
+    function updateAllProgress() {
+      ['base', 'at2', 'meta'].forEach(group => {
+        const list = document.querySelector(`.checklist[data-group="${group}"]`);
+        const label = document.getElementById('prog-' + group);
+        if (list && label) {
+          const total = list.querySelectorAll('.check-item').length;
+          const done = list.querySelectorAll('.check-item.done').length;
+          label.textContent = `${done} / ${total} étapes`;
+        }
+      });
+    }
+
+    // Onglets exemples Métaprompt
+    function switchTab(btn, panelId) {
+      const parent = btn.closest('.view-section');
+      parent.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(panelId).classList.add('active');
+    }
+
+    // Simulateur 4 IA (Atelier 1)
+    const simData = [
+      {
+        chatgpt: ["1. Productivité accrue : générez cours et exercices en quelques secondes.", "2. Différenciation instantanée : adaptez vos supports (standard, remédiation, DYS).", "3. Préparation au monde professionnel : familiariser les élèves dès aujourd'hui."],
+        claude: ["1. Recentrage sur l'humain : déléguez le répétitif pour mieux accompagner vos élèves.", "2. Esprit critique : analyser les erreurs de l'IA est une compétence clé du XXIe siècle.", "3. Co-création : l'IA propose un premier jet, l'enseignant reste l'expert pédagogique."],
+        gemini: ["1. Recherche enrichie : analyse croisée de vos documents, slides et vidéos.", "2. Multimodalité : textes, images et schémas traités simultanément.", "3. Suivi personnalisé : conception rapide de parcours adaptés à chaque élève."],
+        mistral: ["1. Souveraineté numérique : modèle européen conforme au RGPD.", "2. Finesse en français : excellente maîtrise des nuances linguistiques et littéraires.", "3. Accès ouvert : modèles légers et souverains adaptés au cadre éducatif."]
+      },
+      {
+        chatgpt: ["1. Raccourcir les phrases (12 à 15 mots max) et supprimer la voie passive.", "2. Aérer la mise en page avec des puces et des mots-clés en gras.", "3. Ajouter 3 questions de repérage très progressives à la fin du texte."],
+        claude: ["1. Préserver toutes les notions historiques du programme sans infantiliser l'élève.", "2. Expliciter les connecteurs logiques (cause / conséquence) souvent implicites.", "3. Proposer un encadré lexical de 4 mots difficiles avant la lecture."],
+        gemini: ["1. Structurer le texte en 3 blocs thématiques avec un titre-question par paragraphe.", "2. Associer chaque paragraphe à une icône ou un repère chronologique visuel.", "3. Générer une version audio ou un résumé schématique en complément."],
+        mistral: ["1. Privilégier un vocabulaire français précis mais courant, sans tournures archaïques.", "2. Découper les consignes doubles en étapes numérotées (1 verbe par ligne).", "3. Proposer une amorce de réponse pour faciliter le passage à l'écrit."]
+      },
+      {
+        chatgpt: ["1. Copier-coller sans compréhension lors des devoirs à la maison.", "2. Confiance excessive envers des réponses plausibles mais fausses.", "3. Perte d'entraînement à la rédaction personnelle."],
+        claude: ["1. Illusion de maîtrise : lire une réponse fluide donne l'impression d'avoir compris.", "2. Contournement de l'effort cognitif pourtant indispensable à la mémorisation.", "3. Standardisation de la pensée si l'élève accepte la première proposition."],
+        gemini: ["1. Difficulté à vérifier la fiabilité des sources citées ou absentes.", "2. Partage involontaire de données personnelles dans les prompts.", "3. Confusion entre moteur de recherche documentaire et modèle génératif."],
+        mistral: ["1. Biais culturels et linguistiques liés aux corpus d'entraînement anglophones.", "2. Enjeux de protection des données des mineurs (RGPD).", "3. Nécessité d'éduquer à l'esprit critique et à la citation des outils utilisés."]
+      }
+    ];
+
+    function updateSimulator() {
+      const idx = document.getElementById('sim-select').value;
+      const d = simData[idx];
+      const cards = [
+        { name: 'CHATGPT', bg: '#ecfdf5', bd: '#a7f3d0', col: '#065f46', list: d.chatgpt },
+        { name: 'CLAUDE', bg: '#fffbeb', bd: '#fde68a', col: '#92400e', list: d.claude },
+        { name: 'GEMINI', bg: '#eef2ff', bd: '#c7d2fe', col: '#4338ca', list: d.gemini },
+        { name: 'MISTRAL 🇫🇷', bg: '#eff6ff', bd: '#bfdbfe', col: '#1d4ed8', list: d.mistral }
+      ];
+      document.getElementById('sim-grid').innerHTML = cards.map(c => `
+        <div style="background:${c.bg};border:1px solid ${c.bd};border-radius:11px;padding:13px 15px;">
+          <div style="font-weight:800;font-size:0.82rem;color:${c.col};margin-bottom:6px;">${c.name}</div>
+          ${c.list.map(item => `<p style="font-size:0.83rem;margin-bottom:4px;color:#1e293b;">${item}</p>`).join('')}
+        </div>
+      `).join('');
+    }
+
+    // Générateur RACTIF
+    function fillRactif(type) {
+      const presets = {
+        seance: {
+          role: "Enseignant expérimenté du second degré et ingénieur pédagogique",
+          action: "Concevoir et structurer une fiche de séance complète et active",
+          contexte: "Classe de 4e hétérogène (28 élèves), séance de 55 minutes sur [THÈME DU CHAPITRE]",
+          ton: "Clair, structuré, engageant et directement opérationnel en classe",
+          inst: "Inclure une situation déclenchante (5 min), une activité d'investigation (25 min), une variante étayée pour les élèves à BEP/DYS, et une trace écrite de 5 lignes maximum.",
+          format: "Tableau à 4 colonnes : Timing | Rôle enseignant | Activité élève | Adaptation BEP"
+        },
+        bep: {
+          role: "Enseignant spécialisé en adaptation scolaire et pédagogie différenciée (BEP)",
+          action: "Étayer et rendre accessible un support de cours sans appauvrir les notions du programme",
+          contexte: "Élèves de [NIVEAU] présentant des troubles DYS ou des difficultés de lecture en [MATIÈRE]",
+          ton: "Bienveillant, explicite, dépourvu de jargon inutile",
+          inst: "Découper le texte en paragraphes de 3 lignes max avec intertitres, utiliser des phrases courtes à la voix active, mettre en gras 5 mots-clés et découper chaque consigne en étapes numérotées (1 verbe d'action par ligne).",
+          format: "Texte adapté aéré + encadré Mini-lexique + consignes pas à pas"
+        },
+        eval: {
+          role: "Formateur expert en évaluation formative et critériée",
+          action: "Concevoir une évaluation progressive accompagnée de sa grille de réussite",
+          contexte: "Élèves de [NIVEAU] en [MATIÈRE] en fin de séquence sur [NOTION]",
+          ton: "Précis, objectif et encourageant",
+          inst: "Proposer 3 exercices gradués (★ repérage, ★★ compréhension, ★★★ transfert) avec des critères observables pour chaque niveau et des conseils de remédiation en cas d'erreur fréquente.",
+          format: "Sujet élève prêt à imprimer + tableau corrigé / grille critériée"
+        }
+      };
+      const p = presets[type];
+      document.getElementById('r-role').value = p.role;
+      document.getElementById('r-action').value = p.action;
+      document.getElementById('r-contexte').value = p.contexte;
+      document.getElementById('r-ton').value = p.ton;
+      document.getElementById('r-inst').value = p.inst;
+      document.getElementById('r-format').value = p.format;
+      buildRactif();
+    }
+
+    function buildRactif() {
+      const r = document.getElementById('r-role').value.trim();
+      const a = document.getElementById('r-action').value.trim();
+      const c = document.getElementById('r-contexte').value.trim();
+      const t = document.getElementById('r-ton').value.trim();
+      const i = document.getElementById('r-inst').value.trim();
+      const f = document.getElementById('r-format').value.trim();
+
+      if (!r && !a && !c && !t && !i && !f) {
+        document.getElementById('ractif-output').textContent = "Remplissez les champs ci-dessus (ou cliquez sur un modèle rapide) pour générer votre prompt structuré…";
+        return;
+      }
+
+      const lines = [];
+      if (r) lines.push(`Rôle : Agis en tant que ${r}.`);
+      if (a) lines.push(`Action : Ta tâche consiste à ${a}.`);
+      if (c) lines.push(`Contexte : ${c}.`);
+      if (t) lines.push(`Tonalité : Adopte un ton ${t}.`);
+      if (i) lines.push(`Instructions & contraintes : ${i}`);
+      if (f) lines.push(`Format attendu : ${f}`);
+      lines.push(`
+Avant de rédiger si un élément reste ambigu, pose-moi 2 ou 3 questions courtes de clarification.`);
+
+      document.getElementById('ractif-output').textContent = lines.join('
+');
+    }
+
+    // Init
+    loadChecks();
+    updateSimulator();
+  </script>
+</body>
+</html>
