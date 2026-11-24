@@ -1814,7 +1814,7 @@ Support : [COLLEZ VOTRE TEXTE]</div>
         mistral: ["1. Souveraineté numérique : modèle européen conforme au RGPD.", "2. Finesse en français : excellente maîtrise des nuances linguistiques et littéraires.", "3. Accès ouvert : modèles légers et souverains adaptés au cadre éducatif."]
       },
       {
-        chatgpt: ["1. Raccourcir les phrases (12 à 15 mots max) et supprimer la voie passive.", "2. Aérer la mise en page avec des puces et des mots-clés en gras.", "3. Ajouter 3 questions de repérage très progressives à la fin du texte."],
+        chatgpt: ["1. Raccourcir les phrases (12 à 15 mots max) et supprimer la voix passive.", "2. Aérer la mise en page avec des puces et des mots-clés en gras.", "3. Ajouter 3 questions de repérage très progressives à la fin du texte."],
         claude: ["1. Préserver toutes les notions historiques du programme sans infantiliser l'élève.", "2. Expliciter les connecteurs logiques (cause / conséquence) souvent implicites.", "3. Proposer un encadré lexical de 4 mots difficiles avant la lecture."],
         gemini: ["1. Structurer le texte en 3 blocs thématiques avec un titre-question par paragraphe.", "2. Associer chaque paragraphe à une icône ou un repère chronologique visuel.", "3. Générer une version audio ou un résumé schématique en complément."],
         mistral: ["1. Privilégier un vocabulaire français précis mais courant, sans tournures archaïques.", "2. Découper les consignes doubles en étapes numérotées (1 verbe par ligne).", "3. Proposer une amorce de réponse pour faciliter le passage à l'écrit."]
@@ -1902,11 +1902,9 @@ Support : [COLLEZ VOTRE TEXTE]</div>
       if (t) lines.push(`Tonalité : Adopte un ton ${t}.`);
       if (i) lines.push(`Instructions & contraintes : ${i}`);
       if (f) lines.push(`Format attendu : ${f}`);
-      lines.push(`
-Avant de rédiger si un élément reste ambigu, pose-moi 2 ou 3 questions courtes de clarification.`);
+      lines.push('\nAvant de rédiger, si un élément reste ambigu, pose-moi 2 ou 3 questions courtes de clarification.');
 
-      document.getElementById('ractif-output').textContent = lines.join('
-');
+      document.getElementById('ractif-output').textContent = lines.join('\n');
     }
 
     // Init
